@@ -2,8 +2,8 @@ import demoDb from '../db/demo-db'
 import { success, error } from '../../../utils/response'
 
 export default {
-  async selectDemo () {
-    const demos = await demoDb.selectDemo()
+  async selectDemo ({ page, page_size }) {
+    const demos = await demoDb.selectDemo({ page, page_size })
     return demos ? success(demos) : error()
   },
   async insertDemo ({ title, content, create_time, update_time }) {

@@ -2,10 +2,10 @@ import query from '../../../utils/mysql/query'
 import { formatSql } from '../../../utils/utils'
 
 export default {
-  selectSystem () {
+  selectSystem ({ page = 1, page_size = 10 }) {
     return new Promise(async (resolve) => {
       try {
-        const sql = 'SELECT * FROM `t_system`'
+        const sql = `SELECT * FROM \`t_system\` ORDER BY id DESC LIMIT ${(page - 1) * page_size},${page_size}`
         const systems = await query({ sql })
         resolve(systems)
       } catch (error) {
@@ -13,10 +13,10 @@ export default {
       }
     })
   },
-  insertSystem ({ name, value }) {
+  insertSystem ({ name, value, create_time, update_time }) {
     return new Promise(async (resolve) => {
       try {
-        const sqlHandle = formatSql({ table: 't_system', data: { name, value } })
+        const sqlHandle = formatSql({ table: 't_system', data: { name, value, create_time, update_time } })
         await query(sqlHandle)
         resolve(true)
       } catch (error) {

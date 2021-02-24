@@ -2,10 +2,10 @@ import query from '../../../utils/mysql/query'
 import { formatSql } from '../../../utils/utils'
 
 export default {
-  selectDemo () {
+  selectDemo ({ page = 1, page_size = 10 }) {
     return new Promise(async (resolve) => {
       try {
-        const sql = 'SELECT * FROM `t_demo`'
+        const sql = `SELECT * FROM \`t_demo\` ORDER BY id DESC LIMIT ${(page - 1) * page_size},${page_size}`
         const demos = await query({ sql })
         resolve(demos)
       } catch (error) {
