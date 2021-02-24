@@ -58,5 +58,24 @@ export default {
       req.connection.remoteAddress || // 判断 connection 的远程 IP
       req.socket.remoteAddress || // 判断后端的 socket 的 IP
       req.connection.socket.remoteAddress
+  },
+  formatSql({ type = 'insert', table, data }) {
+    type = type.toLocaleLowerCase()
+    const keys = []
+    const newData = []
+    for (let key in data) {
+      if (data[key] != undefined) {
+        keys.push(key)
+        newData.push(data[key])
+      }
+    }
+    let sql = ''
+    if (type == 'insert') {
+      sql = `INSERT INTO \`${table}\` (\`${keys.join('`,`')}\`) VALUES (${keys.map(_ => '?').join(',')})`
+    } else if (type == 'update') {
+      sql = `UPDATE \`${table}\` SET \`${keys.join('`=?,`')}\`=?`
+    }
+
+    return { sql, params: newData }
   }
 }

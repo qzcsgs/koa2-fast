@@ -17,7 +17,7 @@ function checkApiList (url) {
 
 export default async function (ctx, next) {
   if (checkApiList(ctx.req.url)) {
-    next()
+    await next()
   }
   // else if () {
 

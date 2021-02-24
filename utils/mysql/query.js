@@ -11,7 +11,7 @@ const pool = mysql.createPool({
   dateStrings: true
 })
 
-export default function (sql, params) {
+export default function ({ sql, params }) {
   return new Promise((resolve, reject) => {
     pool.getConnection((err, connect) => {
       if (err) {

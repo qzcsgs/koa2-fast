@@ -18,7 +18,7 @@ const app = new Koa()
 const router = koaRouter()
 
 // middlewares
-app.use(convert(bodyparser))
+app.use(convert(bodyparser()))
 app.use(convert(cors()))
 app.use(convert(json()))
 app.use(convert(logger()))
