@@ -1,6 +1,6 @@
 // 不需要check的接口
 const apiList = [
-  '/ate',
+  '/demo',
   '/system'
 ]
 

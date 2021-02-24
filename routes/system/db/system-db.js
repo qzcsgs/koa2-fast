@@ -6,7 +6,7 @@ export default {
     return new Promise(async (resolve) => {
       try {
         const sql = 'SELECT * FROM `t_system`'
-        const systems = await query(sql, [])
+        const systems = await query({ sql })
         resolve(systems)
       } catch (error) {
         resolve(false)

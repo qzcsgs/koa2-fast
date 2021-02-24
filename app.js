@@ -12,6 +12,7 @@ import schedule from './schedule'
 
 // Api
 import system from './routes/system/controller/system-controller'
+import demo from './routes/demo/controller/demo-controller'
 
 schedule() // 计划任务
 const app = new Koa()
@@ -27,6 +28,7 @@ app.use(views(__dirname + '/views', { extension: 'jade' }))
 app.use(permission) // 权限
 
 router.use('/system', system.routes(), system.allowedMethods())
+router.use('/demo', demo.routes(), demo.allowedMethods())
 app.use(router.routes(), router.allowedMethods())
 
 // logger
