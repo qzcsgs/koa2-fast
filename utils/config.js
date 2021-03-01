@@ -28,5 +28,9 @@ export default {
     successMessage: '操作成功',
     errorCode: 500,
     errorMessage: '系统错误',
-  }
+    authCode: 403,
+    authMessage: '没有权限'
+  },
+  AES256GCMKey: 'mvMCsmdnilAwucaBGmglsEjamchnlkcA', // 加解密用到的key 32位
+  tokenExpire: 3 * 24 * 3600 * 1000, // token 过期时间
 } 
