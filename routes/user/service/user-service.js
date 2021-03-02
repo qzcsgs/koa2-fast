@@ -5,6 +5,10 @@ import { AES256GCMEncode, md5, randomStrWithLength } from '../../../utils/utils'
 import { userToken, userOldToken, userRefreshToken } from '../../../utils/redis-key'
 import { tokenExpire } from '../../../utils/config'
 
+/**
+ * 生成token和refresh_token并存入redis
+ * @param {number} user_id 用户id
+ */
 const generateToken = (user_id) => {
   const result = {  // 生成新的token
     token: AES256GCMEncode({
@@ -19,6 +23,7 @@ const generateToken = (user_id) => {
 }
 
 export default {
+  generateToken,
   async userLogin ({ name, password }) {
     if (!name || !password) { return error() }
 
@@ -34,6 +39,12 @@ export default {
       return error('用户名或密码错误')
     }
   },
+  /**
+   * 刷新user token，旧token会继续保存5分钟用来过渡
+   * @param {number} user_id 用户id
+   * @param {string} refresh_token 刷新token凭据
+   * @param {string} token 用户旧的token
+   */
   async refreshToken ({ user_id, refresh_token, token }) {
     const serverRefreshToken = await redis.get(userRefreshToken(user_id))
     if (refresh_token != serverRefreshToken) {
