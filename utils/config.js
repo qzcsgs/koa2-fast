@@ -15,7 +15,8 @@ export default {
   },
   redis: {
     host: '127.0.0.1',
-    port: 6379
+    port: 6379,
+    prefixKey: 'fk_' // redis key 前缀
   },
   popCore: {
     accessKeyId: '',
@@ -32,5 +33,5 @@ export default {
     authMessage: '没有权限'
   },
   AES256GCMKey: 'mvMCsmdnilAwucaBGmglsEjamchnlkcA', // 加解密用到的key 32位
-  tokenExpire: 3 * 24 * 3600 * 1000, // token 过期时间
+  tokenExpire: 3 * 24 * 3600, // token过期时间 单位秒
 } 

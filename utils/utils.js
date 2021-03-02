@@ -95,7 +95,7 @@ export const AES256GCMEncode = (data) => {
 export const AES256GCMDecode = (data) => {
   const iv = data.substring(0, 8)
   data = data.substring(8, data.length)
-  let result = ''
+  let result = {}
   try {
     result = crypto.createDecipheriv('aes-256-gcm', AES256GCMKey, iv).update(data, 'hex', 'utf8')
     result = JSON.parse(result)
