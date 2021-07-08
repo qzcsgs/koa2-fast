@@ -12,6 +12,11 @@ router.post('/refresh/token', async (ctx, next) => {
   ctx.body = await userService.refreshToken(data)
 })
 
+router.post('/send_code', async (ctx, next) => {
+  const data = ctx.request.body
+  ctx.body = await userService.sendCode(data)
+})
+
 router.post('/list', async (ctx, next) => {
   const data = ctx.request.body
   ctx.body = await userService.selectUser(data)

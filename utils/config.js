@@ -1,5 +1,6 @@
 /**
  * 项目配置
+ * 时间统一单位(秒)
  */
 export default {
   port: '1314',
@@ -18,11 +19,24 @@ export default {
     port: 6379,
     prefixKey: 'fk_' // redis key 前缀
   },
-  popCore: {
+  popCoreConfig: {
     accessKeyId: '',
     accessKeySecret: '',
     endpoint: 'https://dysmsapi.aliyuncs.com',
-    apiVersion: '2017-05-25'
+    apiVersion: '2017-05-25',
+    // 短信模板
+    template: {
+      login(phone, code) {
+        return {
+          RegionId: "cn-hangzhou",
+          PhoneNumbers: `${phone}`,
+          SignName: '',
+          TemplateCode: '',
+          TemplateParam: `{ "code": "${code}" }`,
+          codeExpire: 58, // 登录短信验证码过期时间 单位秒
+        }
+      }
+    }
   },
   response: {
     successCode: 200,

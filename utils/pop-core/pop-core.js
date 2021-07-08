@@ -1,4 +1,4 @@
 import Core from '@alicloud/pop-core'
-import { popCore } from '../config'
+import { popCoreConfig } from '../config'
 
-export default new Core(popCore)
+export default new Core(popCoreConfig)

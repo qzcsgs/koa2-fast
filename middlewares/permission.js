@@ -1,5 +1,5 @@
 import redis from '../utils/redis'
-import { AES256GCMDecode } from '../utils/utils'
+import { AES256GCMDecode, getClientIP } from '../utils/utils'
 import { auth } from '../utils/response'
 import { tokenExpire } from '../utils/config'
 import { userToken, userOldToken } from '../utils/redis-key'
@@ -7,6 +7,7 @@ import { userToken, userOldToken } from '../utils/redis-key'
 // 不需要check token的接口
 const apiList = [
   '/user/login',
+  '/user/send_code',
   '/system'
 ]
 
@@ -56,6 +57,7 @@ const checkToken = async (ctx) => {
   }
   
   ctx.request.body.token = token
+  ctx.request.body.ip = getClientIP(ctx.req)
   return true
 }
 

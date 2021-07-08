@@ -10,5 +10,11 @@ export default {
   },
   userRefreshToken (user_id) {
     return `${prefixKey}${user_id}_refresh_token`
+  },
+  /**
+   * 短信验证码
+   */
+  userPhoneCode (phone) {
+    return `${prefixKey}${phone}_code`
   }
 }
